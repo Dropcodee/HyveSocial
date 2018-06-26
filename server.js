@@ -25,9 +25,9 @@ require("./config/passport")(passport);
 
 // CONNECTION TO MONGODB
 mongoose
-	.connect(db)
-	.then(() => console.log("Mongodb connection successful"))
-	.catch(err => console.log(err));
+  .connect(db)
+  .then(() => console.log("Mongodb connection successful"))
+  .catch(err => console.log(err));
 // END OF CONNECTION
 
 // use routes
@@ -38,5 +38,5 @@ const port = process.env.PORT || 3002;
 // End of Routes
 
 app.listen(port, () => {
-	console.log(`Server running on port ${port}`);
+  console.log(`Server running on port ${port}`);
 });
