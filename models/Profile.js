@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// CREATE SCHEMA
+//create profile schema
 const ProfileSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
@@ -21,18 +21,18 @@ const ProfileSchema = new Schema({
   location: {
     type: String
   },
-  skills: {
-    type: [String],
-    required: true
-  },
   status: {
     type: String,
+    required: true
+  },
+  skills: {
+    type: [String],
     required: true
   },
   bio: {
     type: String
   },
-  githubUsername: {
+  githubusername: {
     type: String
   },
   experience: [
@@ -42,41 +42,52 @@ const ProfileSchema = new Schema({
         required: true
       },
       company: {
-        type: String
+        type: String,
+        required: true
       },
       location: {
         type: String
       },
       from: {
-        type: String
+        type: Date,
+        required: true
       },
       to: {
-        type: String
+        type: Date
       },
       current: {
         type: Boolean,
-        required: true
+        default: false
+      },
+      description: {
+        type: String
       }
     }
   ],
 
   education: [
     {
-      Department: {
-        type: String
+      degree: {
+        type: String,
+        required: true
       },
-      HomeAddress: {
-        type: String
+      department: {
+        type: String,
+        required: true
       },
       from: {
-        type: String
+        type: Date,
+        required: true
       },
       to: {
-        type: String
+        type: Date
       },
-      currentLevel: {
+      current: {
         type: Boolean,
-        required: true
+        default: false
+      },
+      description: {
+        type: String
       }
     }
   ],
@@ -91,10 +102,10 @@ const ProfileSchema = new Schema({
     twitter: {
       type: String
     },
-    linkedin: {
+    instagram: {
       type: String
     },
-    instagram: {
+    linkedin: {
       type: String
     }
   },
@@ -103,4 +114,5 @@ const ProfileSchema = new Schema({
     default: Date.now
   }
 });
+
 module.exports = Profile = mongoose.model("profile", ProfileSchema);
