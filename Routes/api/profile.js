@@ -5,6 +5,8 @@ const passport = require("passport");
 
 // bringing in validation
 const validateProfileData = require("../../validation/profile");
+const validateExperienceData = require("../../validation/experience");
+const validateEducationData = require("../../validation/education");
 // BRINGING IN PROFILE & USER MODELS
 const Profile = require("../../models/Profile");
 // USER MODEL
@@ -33,6 +35,65 @@ router.get(
       .catch(err => res.status(404).json(err));
   }
 );
+
+// @route: GET api/profile/handle/:handle
+// @desc: GET USERS PROFILE BY USER HANDLE
+// @access: PUBLIC
+router.get("/handle/:handle", (req, res) => {
+  const errors = {};
+
+  Profile.findOne({ handle: req.params.handle })
+    .populate("user", ["name", "avatar"])
+    .then(profile => {
+      if (!profile) {
+        errors.handleNotFoundError = "Sorry user does not exist";
+        res.status(404).json(errors);
+      }
+      // if the handle exists
+
+      res.json(profile);
+    })
+    .catch(err => res.status(404).json(err));
+});
+
+// @route: GET api/profile/user/:user_id
+// @desc: GET USERS PROFILE BY USER ID
+// @access: PUBLIC
+router.get("/user/:user_id", (req, res) => {
+  const errors = {};
+
+  Profile.findOne({ user: req.params.user_id })
+    .populate("user", ["name", "avatar"])
+    .then(profile => {
+      if (!profile) {
+        errors.handleNotFoundError = "Sorry user does not exist";
+        res.status(404).json(errors);
+      }
+      // if the handle exists
+
+      res.json(profile);
+    })
+    .catch(err => res.status(404).json(err));
+});
+
+// @route: GET api/profile/all
+// @desc: GET  ALL USERS PROFILE
+// @access: PUBLIC
+router.get("/all", (req, res) => {
+  const errors = {};
+  Profile.find()
+    .populate("user", ["name", "avatar"])
+    .then(profiles => {
+      if (!profiles) {
+        errors.profilesNotFound = "No profiles found";
+        return res.status.json(errors);
+      }
+      res.json(profiles);
+    })
+    .catch(err =>
+      res.status(404).json({ appProfileError: "No Profiles Found" })
+    );
+});
 
 // @route: POST api/profile
 // @desc: POST NEW AND CURRENT USERS PROFILE
@@ -95,6 +156,78 @@ router.post(
           new Profile(ProfileInputs).save().then(profile => res.json(profile));
         });
       }
+    });
+  }
+);
+
+// @route: POST  api/profile/experience
+// @desc: POST USER EXPERIENCE AND ADD TO USER DATA
+// @access: PRIVATE
+
+router.post(
+  "/experience",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateExperienceData(req.body);
+
+    // checking validation
+    if (!isValid) {
+      // return all the errors
+      return res.status(400).json(errors);
+    }
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      const newExperienceInput = {
+        title: req.body.title,
+        company: req.body.company,
+        location: req.body.location,
+        from: req.body.from,
+        to: req.body.to,
+        current: req.body.current,
+        description: req.body.description
+      };
+
+      // ADD DEVELOPER EXPERIENCE
+      profile.experience.unshift(newExperienceInput);
+      // save experience
+      profile.save().then(profile => {
+        res.json(profile);
+      });
+    });
+  }
+);
+
+// @route: POST  api/profile/education
+// @desc: POST USER EXPERIENCE AND ADD TO USER DATA
+// @access: PRIVATE
+
+router.post(
+  "/education",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateEducationData(req.body);
+
+    // checking validation
+    if (!isValid) {
+      // return all the errors
+      return res.status(400).json(errors);
+    }
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      const newEducationInput = {
+        degree: req.body.degree,
+        department: req.body.department,
+        location: req.body.location,
+        from: req.body.from,
+        to: req.body.to,
+        current: req.body.current,
+        description: req.body.description
+      };
+
+      // ADD DEVELOPER EDUCATION
+      profile.education.unshift(newEducationInput);
+      // save education
+      profile.save().then(profile => {
+        res.json(profile);
+      });
     });
   }
 );
