@@ -1,11 +1,19 @@
 import React from "react";
+import PropTypes from 'prop-types'
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux'
 class HeroSection extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
 	}
-
+  componentWillMount() { 
+    // check if isAuthenticated is true then redirect user back to dashboard
+    if(this.props.auth.isAuthenticated) {
+      // redirect user to dashboard
+      this.props.history.push('/Dashboard')
+    }
+  }
 	render() {
 		return (
 			<div className="landing">

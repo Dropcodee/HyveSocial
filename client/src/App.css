@@ -2,12 +2,15 @@
 	padding: 0;
 	margin: 0;
 }
+
 img {
 	width: 100%;
 }
+
 .bg-dark {
 	background-color: #263238 !important;
 }
+
 .landing {
 	position: relative;
 	background: url("./images/code.jpg") no-repeat;
@@ -45,6 +48,7 @@ img {
 }
 
 /*  Custom button styles */
+
 .btn-custom {
 	border: none;
 	border-radius: 0 !important;
@@ -53,9 +57,11 @@ img {
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23) !important;
 	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 }
+
 .btn-custom:hover {
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22) !important;
 }
+
 .card-custom {
 	border: 0;
 	min-height: 450px;
@@ -64,9 +70,11 @@ img {
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23) !important;
 	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 }
+
 .card-custom:hover {
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22) !important;
 }
+
 .svg-1 {
 	position: relative;
 	margin: auto;
@@ -75,12 +83,14 @@ img {
 	background-size: 200px 500px;
 	background-position: center center;
 	background-repeat: no-repeat;
-	opacity: 0.3;
+	opacity: 0.6;
 	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 }
+
 .svg-1:hover {
 	opacity: 1;
 }
+
 .btn-form {
 	width: 50% !important;
 	margin: auto;
@@ -94,6 +104,7 @@ img {
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23) !important;
 	transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 }
+
 .btn-form:hover {
 	width: 100% !important;
 	background-color: rgba(123, 31, 162, 1);
