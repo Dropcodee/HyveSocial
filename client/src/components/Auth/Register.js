@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import classnames from "classnames";
+import TextFieldGroup from "../common/TextFieldGroup";
 import { registerUser } from "../../actions/authAction";
 
 class Register extends React.Component {
@@ -18,11 +18,11 @@ class Register extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
-    componentWillMount() { 
+  componentWillMount() {
     // check if isAuthenticated is true then redirect user back to dashboard
-    if(this.props.auth.isAuthenticated) {
+    if (this.props.auth.isAuthenticated) {
       // redirect user to dashboard
-      this.props.history.push('/Dashboard')
+      this.props.history.push("/Dashboard");
     }
   }
   // Adding life cycle method to recieve new props
@@ -61,74 +61,43 @@ class Register extends React.Component {
                 <svg className="svg-1" />
                 <div className="card-body">
                   <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className={classnames("form-control form-control-lg", {
-                          "is-invalid": errors.name
-                        })}
-                        placeholder="Name"
-                        value={this.state.name}
-                        name="name"
-                        onChange={this.onChange}
-                      />
-                      {errors.name && (
-                        <div className="invalid-feedback">{errors.name}</div>
-                      )}
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="email"
-                        className={classnames("form-control form-control-lg", {
-                          "is-invalid": errors.email
-                        })}
-                        placeholder="Email Address"
-                        value={this.state.email}
-                        name="email"
-                        onChange={this.onChange}
-                      />
-                      {errors.email && (
-                        <div className="invalid-feedback">{errors.email}</div>
-                      )}
-                      <small className="form-text text-muted">
-                        This site uses Gravatar so if you want a profile image,
-                        use a Gravatar email
-                      </small>
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="password"
-                        className={classnames("form-control form-control-lg", {
-                          "is-invalid": errors.password
-                        })}
-                        placeholder="Password"
-                        value={this.state.password}
-                        name="password"
-                        onChange={this.onChange}
-                      />
-                      {errors.password && (
-                        <div className="invalid-feedback">
-                          {errors.password}
-                        </div>
-                      )}
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="password"
-                        className={classnames("form-control form-control-lg", {
-                          "is-invalid": errors.password2
-                        })}
-                        placeholder="Confirm Password"
-                        value={this.state.password2}
-                        name="password2"
-                        onChange={this.onChange}
-                      />
-                      {errors.password2 && (
-                        <div className="invalid-feedback">
-                          {errors.password2}
-                        </div>
-                      )}
-                    </div>
+                    <TextFieldGroup
+                      name="name"
+                      type="text"
+                      placeholder="Enter Your name"
+                      value={this.state.name}
+                      onChange={this.onChange}
+                      error={errors.name}
+                    />
+
+                    <TextFieldGroup
+                      name="email"
+                      type="email"
+                      placeholder="johndoe@mail.com"
+                      value={this.state.email}
+                      onChange={this.onChange}
+                      error={errors.email}
+                      info="Our site makes use of Gravatar for now so enter a gavatar mail for profile image, thanks for understanding."
+                    />
+
+                    <TextFieldGroup
+                      name="password"
+                      type="password"
+                      placeholder="Enter Password"
+                      value={this.state.password}
+                      onChange={this.onChange}
+                      error={errors.password}
+                    />
+
+                    <TextFieldGroup
+                      name="password2"
+                      type="password"
+                      placeholder="Verify Password"
+                      value={this.state.password2}
+                      onChange={this.onChange}
+                      error={errors.password2}
+                    />
+
                     <input
                       type="submit"
                       className="btn btn-info btn-block mt-4 btn-form"
