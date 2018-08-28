@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
@@ -179,6 +180,9 @@ class EditProfile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
+              <Link to="/Dashboard" className="btn btn-custom">
+                Go Back
+              </Link>
               <h2 className="display-4 text-center">Edit Profile</h2>
               <p className="lead text-muted">Make Your profile better.</p>
               <form onSubmit={this.onSubmit}>
@@ -209,6 +213,7 @@ class EditProfile extends Component {
                   value={this.state.company}
                   onChange={this.onChange}
                   error={errors.company}
+                  info="Enter your group name used in working on the project"
                 />
 
                 <TextFieldGroup

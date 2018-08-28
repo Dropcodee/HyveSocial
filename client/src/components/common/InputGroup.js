@@ -10,8 +10,8 @@ const InputGroup = ({
   error,
   type,
   onChange,
-  label,
-  icon
+  icon,
+  info
 }) => {
   return (
     <div className="input-group mb-4">
@@ -30,6 +30,7 @@ const InputGroup = ({
         onChange={onChange}
         name={name}
       />
+      {info && <small className="text-muted form-text">{info}</small>}
       {error && <div className="invalid-feedback">{error}</div>}
     </div>
   );
@@ -42,7 +43,8 @@ InputGroup.propTypes = {
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   error: PropTypes.string,
-  icon: PropTypes.string
+  icon: PropTypes.string,
+  info: PropTypes.string
 };
 
 InputGroup.defaultProps = {

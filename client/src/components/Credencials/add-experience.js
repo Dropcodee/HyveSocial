@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
-import TextAreaGroup  from "../common/TextAreaGroup";
+import TextAreaGroup from "../common/TextAreaGroup";
+import { addExperience } from "../../actions/profileActions";
 class AddExperience extends Component {
   constructor(props) {
     super(props);
@@ -18,22 +19,37 @@ class AddExperience extends Component {
       errors: {},
       disabled: false
     };
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-        this.onCheck = this.onCheck.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onCheck = this.onCheck.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
   }
   onSubmit(e) {
-    e.preventDefault()
-    console.log("submit")
+    e.preventDefault();
+    const expData = {
+      company: this.state.company,
+      title: this.state.title,
+      location: this.state.location,
+      from: this.state.from,
+      to: this.state.to,
+      current: this.state.current,
+      description: this.state.description
+    };
+    this.props.addExperience(expData, this.props.history);
   }
   onChange(e) {
-      this.setState({[e.target.name]: e.target.value})
+    this.setState({ [e.target.name]: e.target.value });
   }
   onCheck() {
-      this.setState({
-          disabled: !this.state.disabled,
-          current: !this.state.current
-      })
+    this.setState({
+      disabled: !this.state.disabled,
+      current: !this.state.current
+    });
   }
   render() {
     const { errors } = this.state;
@@ -97,10 +113,13 @@ class AddExperience extends Component {
                     name="current"
                     value={this.state.current}
                     checked={this.state.current}
-                    onChange = {this.onCheck}
+                    onChange={this.onCheck}
                     id="current"
                   />
-                  <label htmlFor="current" className="form-check-label"> Current Project </label> 
+                  <label htmlFor="current" className="form-check-label">
+                    {" "}
+                    Current Project{" "}
+                  </label>
                 </div>
                 <TextAreaGroup
                   placeholder="Project Description"
@@ -110,7 +129,11 @@ class AddExperience extends Component {
                   error={errors.description}
                   info="Tell us about your projects"
                 />
-                <input type="submit" value="Complete Experience" className="btn btn-block btn-custom"/>
+                <input
+                  type="submit"
+                  value="Complete Experience"
+                  className="btn btn-block btn-custom"
+                />
               </form>
             </div>
           </div>
@@ -121,10 +144,14 @@ class AddExperience extends Component {
 }
 AddExperience.propTypes = {
   profile: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  addExperience: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
   profile: state.profile,
   errors: state.errors
 });
-export default connect(mapStateToProps)(withRouter(AddExperience));
+export default connect(
+  mapStateToProps,
+  { addExperience }
+)(withRouter(AddExperience));
