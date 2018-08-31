@@ -14,7 +14,8 @@ class Education extends Component {
         <td>{edu.department}</td>
         <td>{edu.department}</td>
         <td>
-          <Moment format="YYYY/MM/DD">{edu.from}</Moment> ->{"  "}
+          <Moment format="YYYY/MM/DD">{edu.from}</Moment> ->
+          {"  "}
           {edu.to === null ? (
             `   CURRENTLY IN SCHOOL.`
           ) : (
@@ -45,7 +46,7 @@ class Education extends Component {
               <th />
             </tr>
           </thead>
-          {education}
+          <tbody>{education}</tbody>
         </table>
       </div>
     );

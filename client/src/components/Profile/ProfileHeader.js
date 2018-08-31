@@ -40,7 +40,6 @@ class ProfileHeader extends Component {
                 {isEmpty(profile.social && profile.social.twitter) ? null : (
                   <a
                     href={profile.social.twitter}
-                    className="text-white p-2"
                     target="_blank"
                     className="text-white p-2"
                   >
