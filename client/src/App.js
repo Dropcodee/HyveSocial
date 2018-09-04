@@ -19,6 +19,8 @@ import AddExperience from "./components/Credencials/add-experience";
 import AddEducation from "./components/Credencials/add-education";
 import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/Profile/Profile";
+import NotFound from "./components/404/notfound";
+import Posts from "./components/posts/Posts";
 import "./App.css";
 
 // check for jwt token on every page refresh
@@ -55,6 +57,7 @@ class App extends Component {
               <Route exact path="/Login" component={Login} />
               <Route exact path="/profiles" component={Profiles} />
               <Route exact path="/profile/:handle" component={Profile} />
+              <Route exact path="/notfound" component={NotFound} />
               <Switch>
                 <PrivateRoute exact path="/Dashboard" component={Dashboard} />
               </Switch>
@@ -85,6 +88,9 @@ class App extends Component {
                   path="/add-education"
                   component={AddEducation}
                 />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/post-feed" component={Posts} />
               </Switch>
             </div>
             <Footer />
