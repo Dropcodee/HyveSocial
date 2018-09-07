@@ -21,6 +21,7 @@ import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/Profile/Profile";
 import NotFound from "./components/404/notfound";
 import Posts from "./components/posts/Posts";
+import Post from "./components/singlePost/Post";
 import "./App.css";
 
 // check for jwt token on every page refresh
@@ -91,6 +92,9 @@ class App extends Component {
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/post-feed" component={Posts} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/post/:id" component={Post} />
               </Switch>
             </div>
             <Footer />

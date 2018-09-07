@@ -13,10 +13,21 @@ class PostForm extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
-
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
   onSubmit(e) {
     e.preventDefault();
-    console.log("ok u have submitted");
+    const { user } = this.props.auth;
+    const newPost = {
+      text: this.state.text,
+      name: user.name,
+      avatar: user.avatar
+    };
+    this.props.addPost(newPost);
+    this.setState({ text: "" });
   }
   onChange(e) {
     this.setState({
@@ -24,7 +35,7 @@ class PostForm extends Component {
     });
   }
   render() {
-    const { errors, text } = this.state;
+    const { errors } = this.state;
     return (
       <div className="post-form-wrapper">
         <div className="post-form mb-3">
@@ -38,7 +49,7 @@ class PostForm extends Component {
                   <TextAreaGroup
                     placeholder="Start a Conversation..."
                     name="text"
-                    value={text}
+                    value={this.state.text}
                     onChange={this.onChange}
                     error={errors.text}
                   />

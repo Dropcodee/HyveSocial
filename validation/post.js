@@ -7,15 +7,15 @@ module.exports = function validatePostData(data) {
   // checking for empty strings and if there is make the value an empty string
   // to enable validator test it.
 
-  data.postText = !isEmpty(data.postText) ? data.postText : "";
+  data.text = !isEmpty(data.text) ? data.text : "";
   // end of check
 
-  if (!Validator.isLength(data.postText, { min: 10, max: 350 })) {
-    errors.postText = "Posts must be between 10 and 350 characters";
+  if (!Validator.isLength(data.text, { min: 10, max: 350 })) {
+    errors.text = "Posts must be between 10 and 350 characters";
   }
-  if (Validator.isEmpty(data.postText)) {
+  if (Validator.isEmpty(data.text)) {
     // validator checks for empty string and prints out errors
-    errors.postText = "Text field is required";
+    errors.text = "Text field is required";
   }
 
   return {
