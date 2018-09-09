@@ -151,12 +151,12 @@ router.post(
   }
 );
 
-// @route: POST api/posts/comments/:id of the post
+// @route: POST api/posts/comment/:id of the post
 // @desc: POST add comments to post
 // @access: PRIVATE
 
 router.post(
-  "/comments/:id",
+  "/comment/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validatePostData(req.body);
@@ -184,12 +184,12 @@ router.post(
   }
 );
 
-// @route: DELETE api/posts/comments/:id/:comment_id
+// @route: DELETE api/posts/comment/:id/:comment_id
 // @desc: DELETE a comment
 // @access: PRIVATE
 
 router.delete(
-  "/comments/:id/:comment_id",
+  "/comment/:id/:comment_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Post.findById(req.params.id)
