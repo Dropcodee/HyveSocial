@@ -39,7 +39,7 @@ app.use("/api/posts", posts);
 // serve static pages if the app is in production
 if (process.env.NODE_ENV === "production") {
   // set the static folder to look into
-  app.use(express.static("client/build"));
+  app.use(express.static("./client/build"));
 
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));

@@ -39,6 +39,12 @@ class Login extends React.Component {
   };
   onSubmit = e => {
     e.preventDefault();
+    let btn = document.getElementById("regBtn");
+    if (btn.value === "Submit") {
+      btn.value = "Loading...";
+    } else if (this.state.errors) {
+      btn.value = "Submit";
+    }
     const loginData = {
       email: this.state.email,
       password: this.state.password
@@ -79,6 +85,7 @@ class Login extends React.Component {
                     />
 
                     <input
+                      id="regBtn"
                       type="submit"
                       className="btn btn-info btn-block mt-4 btn-form"
                     />

@@ -40,6 +40,14 @@ class Register extends React.Component {
   };
   onSubmit = e => {
     e.preventDefault();
+    let btn = document.getElementById("regBtn");
+    if (btn.value === "Register") {
+      btn.value = "Loading...";
+    } else if (this.state.errors === true) {
+      btn.value = "Register";
+    } else {
+      btn.value = "Register";
+    }
     const newMember = {
       name: this.state.name,
       email: this.state.email,
@@ -99,6 +107,7 @@ class Register extends React.Component {
                     />
 
                     <input
+                      id="regBtn"
                       type="submit"
                       className="btn btn-info btn-block mt-4 btn-form"
                     />
